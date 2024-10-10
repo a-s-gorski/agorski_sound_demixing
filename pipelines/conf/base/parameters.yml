@@ -1,0 +1,132 @@
+# reading dataset
+data_processing:
+  signal_type: "mono" # mono | stereo
+  max_signal_size: 6000000 # maxium sampled size of any recording
+  subsequence_len: 10000 # length of each that model will try to learn
+  sources: ["bass.wav", "drums.wav", "other.wav", "vocals.wav"] # 
+  input_source: "mixture.wav"
+  sr: 22500
+
+data_processing_paths:
+  input_path: "data/01_hq"
+  output_path: "data/02_intermediate"
+
+signal_processing:
+  sample_freq: 22500
+  normalize: True
+  highpass: False
+  highpass_freq: 300
+  lowpass: False
+  lowpass_freq: 20
+  resample: False
+  resample_freq: 22500
+  speed: False
+  speed_ratio: 0.8
+  reverb: False
+  channels: False
+  channels_num: 1
+  subseq_len: 10000
+
+spectrogram_processing:
+  sample_freq: 22500
+  n_fft: 400
+  time_mask: True
+  time_mask_param: 120
+  freq_mask: True
+  freq_mask_param: 120
+  to_db: True
+  output_width: 256
+  output_height: 256
+
+test_size: 0.3
+random_state: 42
+
+
+training_waveform:
+  model: "convtasnet" # available: lstm, convtasnet, hdemucs
+  loss: "mse" # available mse, mae, sdr 
+  sources: ["bass.wav", "drums.wav", "other.wav", "vocals.wav"] # availale bass.wav, drums.wav, other.wav, vocals.wav
+  num_channels: 1 # 1 | 2
+  batch_size: 12
+  num_workers: 12
+  num_layers: 2 # only applicapable to lstm
+  hidden_size: 64 # only applicapable to lstm
+  bidirectional: True # only applicapable to lstm
+  transfer_learning: True # only applicapable to hdemucs and convtasnet
+  dropout: 0.0 # only applicapable to lstm
+  learning_rate: 0.001
+  weight_decay: 0.01
+  eps: 0.00000001
+  max_epochs: 2
+  # Learning rate scheduler parameters
+  lr_scheduler: True
+  start_factor: 0.01
+  total_iters: 5
+  # Early stopping parameters
+  early_stopping: True
+  patience: 3 
+  quality: "val_loss" # metric to track for early stopping callback
+  # Checkpoint saving - warning uses a lot of memory
+  save_checkpoint: False
+  checkpoint_output_path: "models/"
+  save_top_k: 1
+  every_n_epochs: 1
+  # Log metrics to mlflow - to setup mlflow create .env in location of .env.example or set env vars as in .env.example
+  log_mlflow: True
+
+train_spectrogram:
+  model: "unet"
+  loss: "mse"
+  batch_size: 3
+  num_workers: 12
+  input_channels: 1
+  sources: ["bass.wav", "drums.wav", "other.wav", "vocals.wav"]
+  learning_rate: 0.001
+  weight_decay: 0.01
+  eps: 0.00000001
+  max_epochs: 5
+# Learning rate scheduler parameters
+  lr_scheduler: True
+  start_factor: 0.01
+  total_iters: 5
+  # Early stopping parameters
+  early_stopping: True
+  patience: 3 
+  quality: "val_loss" # metric to track for early stopping callback
+  # Checkpoint saving - warning uses a lot of memory
+  save_checkpoint: True
+  checkpoint_output_path: "models/"
+  save_top_k: 1
+  every_n_epochs: 2
+  # Log metrics to mlflow - to setup mlflow create .env in location of .env.example or set env vars as in .env.example
+  log_mlflow: True
+
+train_waveform_enriched:
+  model: "gan"
+  sources: ["bass.wav", "drums.wav", "other.wav", "vocals.wav"] # availale bass.wav, drums.wav, other.wav, vocals.wav
+  input_channels: 4
+  output_channels: 4
+  batch_size: 2
+  num_workers: 12
+  latent_dim: 64
+  layer_n: 128
+  hidden: 64
+  signal_len: 10000
+  learning_rate: 0.01
+  weight_decay: 0.00001
+  eps: 0.00000001
+  max_epochs: 3
+  # Learning rate schedulers params
+  lr_scheduler: True
+  start_factor: 0.01
+  total_iters: 5
+  # Early stopping parameters
+  early_stopping: False
+  patience: 3
+  quality: "val_loss"
+  # Checkpoint saving
+  save_checkpoint: False
+  checkpoint_output_path: "models/"
+  save_top_k: 1
+  every_n_epochs: 2
+  log_mlflow: True

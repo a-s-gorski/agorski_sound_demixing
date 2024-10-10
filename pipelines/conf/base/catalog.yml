@@ -1,0 +1,119 @@
+# Here you can define all your data sets by using simple YAML syntax.
+#
+# Documentation for this file format can be found in "The Data Catalog"
+# Link: https://docs.kedro.org/en/stable/data/data_catalog.html
+
+# RawData:
+#   type: MemoryDataSet
+#   filepath: "data/01_hq"
+
+base_dataset:
+  type: pickle.PickleDataSet
+  filepath: "data/02_intermediate/data.pkl"
+  backend: pickle
+
+processed_signal_dataset:
+  type: pickle.PickleDataSet
+  filepath: "data/03_signals/signals.pkl"
+  backend: pickle
+
+signal_train:
+  type: pickle.PickleDataSet
+  filepath: "data/05_signal_dataset/train.pkl"
+  backend: pickle
+
+signal_val:
+  type: pickle.PickleDataSet
+  filepath: "data/05_signal_dataset/val.pkl"
+  backend: pickle
+
+signal_test:
+  type: pickle.PickleDataSet
+  filepath: "data/05_signal_dataset/test.pkl"
+  backend: pickle
+
+signal_train_enriched:
+  type: pickle.PickleDataSet
+  filepath: "data/05_signal_enriched_dataset/train.pkl"
+  backend: pickle
+
+signal_val_enriched:
+  type: pickle.PickleDataSet
+  filepath: "data/05_signal_enriched_dataset/val.pkl"
+  backend: pickle
+
+signal_test_enriched:
+  type: pickle.PickleDataSet
+  filepath: "data/05_signal_enriched_dataset/test.pkl"
+  backend: pickle
+
+signal_enriched_model:
+  type: pickle.PickleDataSet
+  filepath: "data/06_models/signal_generative_model.pkl"
+  backend: pickle
+
+signal_generative_test_metrics:
+  type: pandas.CSVDataSet
+  filepath: "data/08_model_score/signal_generative_metrics.csv"
+
+signal_generative_test_output:
+  type: pickle.PickleDataSet
+  filepath: "data/07_model_output/signal_generative_model_output.pkl"
+  backend: pickle
+
+signal_model:
+  type: pickle.PickleDataSet
+  filepath: "data/06_models/signal_model.pkl"
+  backend: pickle
+
+signal_model_test_output:
+  type: pickle.PickleDataSet
+  filepath: "data/07_model_output/signal_model_output.pkl"
+  backend: pickle
+
+signal_model_test_metrics:
+  type: pandas.CSVDataSet
+  filepath: "data/08_model_score/signal_metrics.csv"
+
+processed_spectrogram_dataset:
+  type: pickle.PickleDataSet
+  filepath: "data/04_spectrograms/spectrograms.pkl"
+  backend: pickle
+
+original_sizes:
+  type: pickle.PickleDataSet
+  filepath: "data/04_spectrograms/orginal_sizes.pkl"
+  backend: pickle
+
+spectrogram_train:
+  type: pickle.PickleDataSet
+  filepath: "data/05_spectrogram_dataset/train.pkl"
+  backend: pickle
+
+spectrogram_val:
+  type: pickle.PickleDataSet
+  filepath: "data/05_spectrogram_dataset/val.pkl"
+  backend: pickle
+
+spectrogram_test:
+  type: pickle.PickleDataSet
+  filepath: "data/05_spectrogram_dataset/test.pkl"
+  backend: pickle
+
+spectrogram_model:
+  type: pickle.PickleDataSet
+  filepath: "data/06_models/spectrogram_model.pkl"
+  backend: pickle
+
+spectrogram_output_frequency:
+  type: pickle.PickleDataSet
+  filepath: "data/07_model_output/spectrogram_model_output_frequency.pkl"
+
+spectrogram_output_waveform:
+  type: pickle.PickleDataSet
+  filepath: "data/07_model_output/spectrogram_model_output_waveform.pkl"
+
+spectrogram_model_test_metrics:
+  type: pandas.CSVDataSet
+  filepath: "data/08_model_score/spectrogram_metrics.csv"
+
