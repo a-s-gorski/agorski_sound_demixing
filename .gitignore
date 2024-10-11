@@ -2,3 +2,6 @@
 sdx-2023-music-demixing-track-starter-kit/
 pipelines/models/
 .venv/
+datasets/
+dist/
+evaluation_audios/
