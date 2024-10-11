@@ -16,7 +16,7 @@ def process_dataset_signals(paths: Dict[str,
                                                                               int | NDArray]]:
     """
     Process MUSDB18 dataset signals using the provided parameters.
-    The directory structure should follow https://dagshub.com/kinkusuma/musdb18-dataset 
+    The directory structure should follow https://dagshub.com/kinkusuma/musdb18-dataset
     aka
     train:
         - song1

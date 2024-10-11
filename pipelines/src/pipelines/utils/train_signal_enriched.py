@@ -191,10 +191,10 @@ def run_inference(
     """
     if isinstance(model, VAE):
         predictions = list(tqdm(map(lambda x: model(
-        x[0].unsqueeze(0))[-1], test_dataset), total=len(test_dataset)))
+            x[0].unsqueeze(0))[-1], test_dataset), total=len(test_dataset)))
     else:
         predictions = list(tqdm(map(lambda x: model(
-        x[0].unsqueeze(0)), test_dataset), total=len(test_dataset)))
+            x[0].unsqueeze(0)), test_dataset), total=len(test_dataset)))
 
     predictions = torch.cat(predictions, dim=0).detach()
     return predictions

@@ -73,5 +73,5 @@ class TrainingSpectrogramConfig(BaseModel):
     save_checkpoint: Optional[bool] = False
     checkpoint_output_path: Optional[str] = "."
     save_top_k: Optional[int] = 1
-    every_n_epochs: Optional[int] = 3 
+    every_n_epochs: Optional[int] = 3
     log_mlflow: Optional[bool] = False

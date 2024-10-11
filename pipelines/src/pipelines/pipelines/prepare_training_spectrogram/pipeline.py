@@ -13,7 +13,10 @@ def create_pipeline():
         ),
         node(
             func=spectrogram_split_node,
-            inputs=["processed_spectrogram_dataset", "params:test_size", "params:random_state"],
+            inputs=[
+                "processed_spectrogram_dataset",
+                "params:test_size",
+                "params:random_state"],
             outputs=["spectrogram_train", "spectrogram_val", "spectrogram_test"],
             name="split_spectrogram"
         )

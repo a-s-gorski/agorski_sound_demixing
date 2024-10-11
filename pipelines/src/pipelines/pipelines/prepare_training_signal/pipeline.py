@@ -13,7 +13,10 @@ def create_pipeline():
         ),
         node(
             func=signal_split_node,
-            inputs=["processed_signal_dataset", "params:test_size", "params:random_state"],
+            inputs=[
+                "processed_signal_dataset",
+                "params:test_size",
+                "params:random_state"],
             outputs=["signal_train", "signal_val", "signal_test"],
             name="split_signal"
         )
