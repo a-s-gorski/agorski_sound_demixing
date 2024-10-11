@@ -5,3 +5,4 @@ pipelines/models/
 datasets/
 dist/
 evaluation_audios/
+hdf5s/
