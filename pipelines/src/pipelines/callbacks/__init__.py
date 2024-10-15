@@ -516,7 +516,6 @@ def get_callbacks(
     """
     if task_name == 'musdb18':
 
-
         return get_musdb18_callbacks(
             config_yaml=config_yaml,
             workspace=workspace,

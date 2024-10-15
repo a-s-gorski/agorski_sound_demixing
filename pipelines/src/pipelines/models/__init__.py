@@ -6,13 +6,14 @@ import torch.nn as nn
 import torch.optim as optim
 from torch.optim.lr_scheduler import LambdaLR
 
+from pipelines.models.mobilenet_subbandtime import MobileNet_Subbandtime
 from pipelines.models.resunet143_decoupleplusinplaceabn_ismir2021 import (
     ResUNet143_DecouplePlusInplaceABN_ISMIR2021,
 )
 from pipelines.models.resunet143_subbandtime import ResUNet143_Subbandtime
 from pipelines.models.unet_base import UNet
-from pipelines.models.mobilenet_subbandtime import MobileNet_Subbandtime
 from pipelines.models.unet_subbandtime import UNetSubbandTime
+
 
 class LitSourceSeparation(pl.LightningModule):
     def __init__(

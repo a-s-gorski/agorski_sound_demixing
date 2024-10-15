@@ -475,7 +475,7 @@ class UNet(nn.Module, Base):
         # x: (batch_size, input_channels, padded_time_steps, freq_bins)
 
         # Let frequency bins be evenly divided by 2, e.g., 1025 -> 1024
-        x = x[..., 0 : x.shape[-1] - 1]  # (bs, input_channels, T, F)
+        x = x[..., 0: x.shape[-1] - 1]  # (bs, input_channels, T, F)
 
         if self.subbands_num > 1:
             x = self.subband.analysis(x)

@@ -65,6 +65,7 @@ def load_audio(
 
     return audio
 
+
 def create_indexes(workspace, config_yaml) -> NoReturn:
     r"""Create and write out training indexes into disk. The indexes may contain
     information from multiple datasets. During training, training indexes will

@@ -6,9 +6,10 @@ import torch.nn as nn
 import torch.nn.functional as F
 from torchlibrosa.stft import ISTFT, STFT, magphase
 
-from pipelines.utils.pytorch_modules import Base, init_bn, init_layer
 from pipelines.models.pqmf import PQMF
 from pipelines.models.unet_base import ConvBlock, DecoderBlock, EncoderBlock
+from pipelines.utils.pytorch_modules import Base, init_bn, init_layer
+
 
 class UNetSubbandTime(nn.Module, Base):
     def __init__(self, input_channels: int, target_sources_num: int):
@@ -319,7 +320,7 @@ class UNetSubbandTime(nn.Module, Base):
         # x: (batch_size, input_channels * subbands_num, padded_time_steps, freq_bins)
 
         # Let frequency bins be evenly divided by 2, e.g., 257 -> 256
-        x = x[..., 0 : x.shape[-1] - 1]  # (bs, input_channels, T, F)
+        x = x[..., 0: x.shape[-1] - 1]  # (bs, input_channels, T, F)
         # x: (batch_size, input_channels * subbands_num, padded_time_steps, freq_bins)
 
         # UNet
@@ -365,10 +366,10 @@ class UNetSubbandTime(nn.Module, Base):
         separated_subband_audio = torch.cat(
             [
                 self.feature_maps_to_wav(
-                    input_tensor=x[:, j * C1 : (j + 1) * C1, :, :],
-                    sp=mag[:, j * C2 : (j + 1) * C2, :, :],
-                    sin_in=sin_in[:, j * C2 : (j + 1) * C2, :, :],
-                    cos_in=cos_in[:, j * C2 : (j + 1) * C2, :, :],
+                    input_tensor=x[:, j * C1: (j + 1) * C1, :, :],
+                    sp=mag[:, j * C2: (j + 1) * C2, :, :],
+                    sin_in=sin_in[:, j * C2: (j + 1) * C2, :, :],
+                    cos_in=cos_in[:, j * C2: (j + 1) * C2, :, :],
                     audio_length=audio_length,
                 )
                 for j in range(self.subbands_num)
