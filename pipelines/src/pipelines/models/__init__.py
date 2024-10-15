@@ -11,7 +11,8 @@ from pipelines.models.resunet143_decoupleplusinplaceabn_ismir2021 import (
 )
 from pipelines.models.resunet143_subbandtime import ResUNet143_Subbandtime
 from pipelines.models.unet_base import UNet
-
+from pipelines.models.mobilenet_subbandtime import MobileNet_Subbandtime
+from pipelines.models.unet_subbandtime import UNetSubbandTime
 
 class LitSourceSeparation(pl.LightningModule):
     def __init__(
@@ -170,26 +171,21 @@ def get_model_class(model_type):
         return ResUNet143_DecouplePlusInplaceABN_ISMIR2021
 
     elif model_type == 'UNet':
-        # from bytesep.models.unet import UNet
 
         return UNet
 
-    # TODO - add later
-    # elif model_type == 'UNetSubbandTime':
-    #     # from bytesep.models.unet_subbandtime import UNetSubbandTime
+    elif model_type == 'UNetSubbandTime':
 
-    #     return UNetSubbandTime
+        return UNetSubbandTime
 
     elif model_type == 'ResUNet143_Subbandtime':
         # from bytesep.models.resunet_subbandtime import ResUNet143_Subbandtime
 
         return ResUNet143_Subbandtime
 
-    # TODO - add later
-    # elif model_type == 'MobileNet_Subbandtime':
-    #     # from bytesep.models.mobilenet_subbandtime import MobileNet_Subbandtime
+    elif model_type == 'MobileNet_Subbandtime':
 
-    #     return MobileNet_Subbandtime
+        return MobileNet_Subbandtime
 
     # elif model_type == 'MobileTiny_Subbandtime':
     #     from bytesep.models.mobiletiny_subbandtime import MobileTiny_Subbandtime

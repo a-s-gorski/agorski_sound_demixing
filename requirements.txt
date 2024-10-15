@@ -1,4 +1,4 @@
-librosa==0.10.2
+librosa==0.8.0
 museval==0.4.0
 h5py==3.12.1
 pytorch_lightning==1.2.1
@@ -9,7 +9,7 @@ museval==0.4.0
 tqdm==4.66.5
 ipykernel==6.29.5
 torchlibrosa==0.0.9
-torch==2.4.1
-torchaudio==2.4.1
-torchvision==0.19.1
+# torch==2.4.1
+# torchaudio==2.4.1
+# torchvision==0.19.1
 pydantic==2.9.2

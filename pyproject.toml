@@ -1,32 +1,44 @@
-[tool.poetry]
-name = "pipelines"
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "agorski_sound_demixing"
 version = "0.1.0"
-description = ""
-authors = ["a-s-gorski <adamsebastiangorski@gmail.com>"]
-readme = "README.md"
-packages = [
-    { include = "pipelines", from="pipelines/src"}
+description = "Your package description"
+authors = [
+    { name = "Your Name", email = "your.email@example.com" }
+]
+dependencies = [
+    "pydantic==2.9.2",
+    "librosa==0.8.0",
+    "museval==0.4.0",
+    "h5py==2.10.0",
+    "pytorch-lightning==1.2.1",
+    "musdb==0.4.0",
+    "tqdm==4.66.5",
+    "ipykernel==6.29.5",
+    "torchlibrosa==0.0.9",
+    "torchaudio==2.4.1",
+    "torchvision==0.19.1",
+    "numpy~=1.19.0",
 ]
 
-[tool.poetry.dependencies]
-python = "^3.12"
-pydantic = "2.9.2"
-librosa = "0.10.2"
-museval = "0.4.0"
-h5py = "3.12.1"
-pytorch-lightning = "1.2.1"
-musdb = "0.4.0"
-tqdm = "4.66.5"
-ipykernel = "6.29.5"
-torchlibrosa = "0.0.9"
-torch = "2.4.1"
-torchaudio = "2.4.1"
-torchvision = "0.19.1"
-numpy = "=1.26.4"
-autopep8 = "^2.3.1"
-isort = "^5.13.2"
+[tool.hatch.envs.default]
+dependencies = [
+    "autopep8>=2.3.1",
+    "isort>=5.13.2"
+]
 
+[tool.hatch.metadata]
+license = "MIT"
 
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+[tool.hatch.build.targets.wheel]
+"pipelines/src/pipelines" = "pipelines"
+packages = ["pipelines/src/pipelines"]
+
+[tool.isort]
+profile = "black"
+
+[tool.autopep8]
+max-line-length = 88

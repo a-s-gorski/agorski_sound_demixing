@@ -6,3 +6,8 @@ datasets/
 dist/
 evaluation_audios/
 hdf5s/
+checkpoints/
+indexes/
+lightning_logs/
+logs/
+musdb18/
