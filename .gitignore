@@ -12,3 +12,7 @@ lightning_logs/
 logs/
 musdb18/
 sep_results/
+data/
+musdb_train
+musdb_valid
+musdb_test

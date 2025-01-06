@@ -10,18 +10,28 @@ authors = [
     { name = "Your Name", email = "your.email@example.com" }
 ]
 dependencies = [
-    "pydantic==2.9.2",
-    "librosa==0.8.0",
-    "museval==0.4.0",
+    "pydantic>=2.9.2,<3.0.0",
+    "librosa==0.8.0,",
+    "museval>=0.4.0,<1.0.0",
     "h5py==2.10.0",
-    "pytorch-lightning==1.2.1",
-    "musdb==0.4.0",
-    "tqdm==4.66.5",
-    "ipykernel==6.29.5",
+    "pytorch-lightning>=1.2.1,<2.0.0",
+    "musdb>=0.4.0,<1.0.0",
+    "tqdm>=4.66.5,<5.0.0",
+    "ipykernel>=6.29.5,<7.0.0",
+    "ipython",
+    "ipywidgets>=8.1.5,<9.0.0 ",
+    "tensorboard>=2.13.0,<3.0.0",
     "torchlibrosa==0.0.9",
     "torchaudio==2.4.1",
     "torchvision==0.19.1",
     "numpy~=1.19.0",
+    "pescador>=3.0.0,<4.0.0",
+    "lmdb>=1.5.1,<2.0.0",
+    "scipy>=1.8.0,<2.0.0",
+    "matplotlib>=3.0.0,<4.0.0",
+    "protobuf==3.20.0",
+    "torchsummary>=1.5.1,<2.0.0",
+    "mir_eval>=0.7.0,<1.0.0",
 ]
 
 [tool.hatch.envs.default]

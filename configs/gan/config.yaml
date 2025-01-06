@@ -1,0 +1,39 @@
+model_prefix: 'exp_musdb_1_wide_unpaired_ralsgan_4'#'exp_large_1' # name of the model to be saved
+n_iterations: 100000
+# for the cyclic gan use these param with ncritic 1
+# but for training wavegan model it is better to use ttur lr_g = 1e-4 lr_d=3e-4 and n_critic=1
+lr_g: 2e-4
+lr_d: 2e-4
+beta1: 0.5
+beta2: 0.9
+decay_lr: False
+generator_batch_size_factor: 1 # in some cases we might try to update the generator with double batch size used in the discriminator
+n_critic: 5 # update generator every n_critic steps 
+# gradient penalty regularization factor.
+p_coeff: 10
+batch_size: 10
+noise_latent_dim: 100 
+model_capacity_size: 64 # reduce the capacity to 32 for faster training also in case of generating larger window size
+
+# rate of storing validation and costs params
+store_cost_every: 300
+progress_bar_step_iter_size: 400
+
+# backup params
+take_backup: True
+backup_every_n_iters: 1000
+save_samples_every: 1000 
+# folder including data under each folder train, valid and test subfolders
+# code can be updated to use mancini dataset piano and noise
+target_signals_dir: 'mancini_piano/piano'
+other_signals_dir: 'mancini_piano/noise'
+
+output_dir: 'output'
+
+#############################
+# Audio Reading Params
+#############################
+window_length: 16384 #[16384, 32768, 65536] change model_capacity size to 32 in case of slice>16384
+sampling_rate: 16000
+normalize_audio: True 
+random_state: 2048
