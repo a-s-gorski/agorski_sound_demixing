@@ -1,0 +1,11 @@
+sr: 44100
+channels: 1
+min_duration: 12.0
+max_duration: 640.0
+aug_shift: true
+sample_length: 262144
+stems:
+  - bass
+  - drums
+  - vocals
+  - other
