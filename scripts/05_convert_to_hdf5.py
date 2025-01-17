@@ -1,3 +1,5 @@
+
+
 import numpy as np
 import os
 import time
@@ -60,7 +62,6 @@ pack_hdf5s_time = time.time()
 
 
 with ProcessPoolExecutor(max_workers=None) as pool:
-    # Initialize tqdm progress bar with total equal to the length of params
     for _ in tqdm(pool.map(write_single_audio_to_hdf5, params), total=len(params)):
         pass
 
