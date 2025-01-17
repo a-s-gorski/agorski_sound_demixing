@@ -16,3 +16,5 @@ data/
 musdb_train
 musdb_valid
 musdb_test
+diffusion_models/
+musdb18_input

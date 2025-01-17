@@ -3,6 +3,18 @@ fix_ffmpeg:
 	pip uninstall -y ffmpeg-python==0.2.0
 	pip install ffmpeg-python==0.2.0
 
+prepare_env:
+	source scripts/01_setup_environnment.sh
+	source scripts/02_install_gpu.sh
+	source scripts
+
+download_data_segmentation:
+	source scripts/00_download_data.sh
+
+download_data_gan:
+	TODO
+
+
 
 format_package:
 	pip install isort autopep8
@@ -72,3 +84,10 @@ seperate_dir:
     	--audios_dir="datasets/musdb18/train" \
     	--outputs_dir="sep_results/$${TRAIN_CONFIG}/train"; \
 
+
+
+diffusion_train_model:
+	python scripts/diffusion_models/02_train.py --dataset_config=configs/diffusion_model/dataset.yaml \
+		--training_config=configs/diffusion_model/training.yaml \
+		--training_data_path=data/musdb18_diffusion/test \
+		--validation_data_path=data/musdb18_diffusion/valid
