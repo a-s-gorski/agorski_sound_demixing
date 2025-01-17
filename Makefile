@@ -9,13 +9,13 @@ format_package:
 	isort pipelines/src/pipelines
 	autopep8 --recursive --in-place pipelines/src/pipelines
 
-train_accompaniment_vocals_mobilenet_subbandtime:
+train_accompaniment_vocals_mobilenet_subbandtime: # done
 	python3.8 scripts/08_train.py --gpus=1 --config_yaml="configs/training/accompaniment-vocals,mobilenet_subbandtime.yaml"
 
-train_accompaniment_vocals_resunet_ismir2021:
+train_accompaniment_vocals_resunet_ismir2021: 
 	python3.8 scripts/08_train.py --gpus=1 --config_yaml="configs/training/accompaniment-vocals,resunet_ismir2021.yaml"
 
-train_accompaniment_vocals_resunet_subbandtime:
+train_accompaniment_vocals_resunet_subbandtime: # done
 	python3.8 scripts/08_train.py --gpus=1 --config_yaml="configs/training/accompaniment-vocals,resunet_subbandtime.yaml"
 
 train_accompaniment_vocals_resunet:
@@ -24,13 +24,13 @@ train_accompaniment_vocals_resunet:
 train_accompaniment_vocals_unet:
 	python3.8 scripts/08_train.py --gpus=1 --config_yaml="configs/training/accompaniment-vocals,unet.yaml"
 
-train_vocals_accompaniment_mobilenet_subbandtime:
+train_vocals_accompaniment_mobilenet_subbandtime: # done
 	python3.8 scripts/08_train.py --gpus=1 --config_yaml="configs/training/vocals-accompaniment,mobilenet_subbandtime.yaml"
 
 train_vocals_accompaniment_resunet_ismir2021:
 	python3.8 scripts/08_train.py --gpus=1 --config_yaml="configs/training/vocals-accompaniment,resunet_ismir2021.yaml"
 
-train_vocals_accompaniment_resunet_subbandtime:
+train_vocals_accompaniment_resunet_subbandtime: # done
 	python3.8 scripts/08_train.py --gpus=1 --config_yaml="configs/training/vocals-accompaniment,resunet_subbandtime.yaml"
 
 train_vocals_accompaniment_resunet:
@@ -49,7 +49,7 @@ train_vocals_bass_drums_other_unet:
 	python3.8 scripts/08_train.py --gpus=1 --config_yaml="configs/training/vocals-bass-drums-other,unet.yaml"
 
 seperate_file:
-	TRAIN_CONFIG=vocals-accompaniment,resunet_subbandtime; \
+	TRAIN_CONFIG=accompaniment-vocals,mobilenet_subbandtime; \
 	echo "seperating train for $${TRAIN_CONFIG}"; \
 	python3.8 scripts/09_separate.py separate_file \
 	    --config_yaml="configs/training/$${TRAIN_CONFIG}.yaml" \
@@ -58,17 +58,30 @@ seperate_file:
     	--output_path="sep_results/vocals_accompaniment_10s_sep_vocals.mp3"
 
 
-seperate_dir:
-	TRAIN_CONFIG=vocals-accompaniment,resunet_subbandtime; \
+seperate_dir_accompaniment_vocals_mobilenet_subbandtime:
+	TRAIN_CONFIG=accompaniment-vocals,mobilenet_subbandtime; \
 	echo "seperating train for $${TRAIN_CONFIG}"; \
 	python3.8 scripts/09_separate.py separate_dir \
 	    --config_yaml="configs/training/$${TRAIN_CONFIG}.yaml" \
-    	--checkpoint_path="checkpoints/musdb18/agorski_sound_demixing/config=$${TRAIN_CONFIG},gpus=1/step=0.pth" \
+    	--checkpoint_path="checkpoints/musdb18/agorski_sound_demixing/config=$${TRAIN_CONFIG},gpus=1/step=100000.pth" \
     	--audios_dir="datasets/musdb18/train" \
     	--outputs_dir="sep_results/$${TRAIN_CONFIG}/train"; \
 	python3.8 scripts/09_separate.py separate_dir \
-	    --config_yaml="configs/training/$${TRAIN_CONFIG}" \
-    	--checkpoint_path="checkpoints/musdb18/agorski_sound_demixing/config=$${TRAIN_CONFIG},gpus=1/step=0.pth" \
+	    --config_yaml="configs/training/$${TRAIN_CONFIG}.yaml" \
+    	--checkpoint_path="checkpoints/musdb18/agorski_sound_demixing/config=$${TRAIN_CONFIG},gpus=1/step=100000.pth" \
+    	--audios_dir="datasets/musdb18/test" \
+    	--outputs_dir="sep_results/$${TRAIN_CONFIG}/test"; \
+
+seperate_dir_vocals_accompaniment_mobilenet_subbandtime:
+	TRAIN_CONFIG=vocals-accompaniment,mobilenet_subbandtime; \
+	echo "seperating train for $${TRAIN_CONFIG}"; \
+	python3.8 scripts/09_separate.py separate_dir \
+	    --config_yaml="configs/training/$${TRAIN_CONFIG}.yaml" \
+    	--checkpoint_path="checkpoints/musdb18/agorski_sound_demixing/config=$${TRAIN_CONFIG},gpus=1/step=300000.pth" \
     	--audios_dir="datasets/musdb18/train" \
     	--outputs_dir="sep_results/$${TRAIN_CONFIG}/train"; \
-
+	python3.8 scripts/09_separate.py separate_dir \
+	    --config_yaml="configs/training/$${TRAIN_CONFIG}.yaml" \
+    	--checkpoint_path="checkpoints/musdb18/agorski_sound_demixing/config=$${TRAIN_CONFIG},gpus=1/step=300000.pth" \
+    	--audios_dir="datasets/musdb18/test" \
+    	--outputs_dir="sep_results/$${TRAIN_CONFIG}/test"; \
