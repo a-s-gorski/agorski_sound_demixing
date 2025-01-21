@@ -176,7 +176,7 @@ class DecoderBlock(nn.Module):
 
 
 class UNet(nn.Module, Base):
-    def __init__(self, input_channels: int, target_sources_num: int):
+    def __init__(self, input_channels: int, target_sources_num: int, *args, **kwargs):
         r"""UNet."""
         super(UNet, self).__init__()
 

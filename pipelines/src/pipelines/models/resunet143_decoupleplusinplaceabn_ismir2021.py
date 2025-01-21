@@ -159,7 +159,7 @@ class DecoderBlockRes4B(nn.Module):
 
 
 class ResUNet143_DecouplePlusInplaceABN_ISMIR2021(nn.Module, Base):
-    def __init__(self, input_channels, target_sources_num):
+    def __init__(self, input_channels, target_sources_num, *args, **kwargs):
         super(ResUNet143_DecouplePlusInplaceABN_ISMIR2021, self).__init__()
 
         self.input_channels = input_channels

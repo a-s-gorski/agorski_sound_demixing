@@ -12,7 +12,7 @@ from pipelines.utils.pytorch_modules import Base, init_bn, init_layer
 
 
 class UNetSubbandTime(nn.Module, Base):
-    def __init__(self, input_channels: int, target_sources_num: int):
+    def __init__(self, input_channels: int, target_sources_num: int, *args, **kwargs):
         r"""Subband waveform UNet."""
         super(UNetSubbandTime, self).__init__()
 

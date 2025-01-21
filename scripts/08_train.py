@@ -5,7 +5,6 @@ import os
 from pipelines.utils.train_script import train
 import argparse
 
-
 def main():
     
     parser = argparse.ArgumentParser()
