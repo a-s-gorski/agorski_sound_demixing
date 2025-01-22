@@ -41,7 +41,7 @@ train:
     batch_data_preprocessor: MixtureTarget
     evaluation_callback: Musdb18
     learning_rate: 1e-3
-    batch_size: 16
+    batch_size: 2
     precision: 32
     steps_per_epoch: 10000  # Every 10000 steps is called an `epoch`.
     evaluate_step_frequency: 10000     # Evaluate every #evaluate_step_frequency steps.
