@@ -66,6 +66,19 @@ seperate_file:
     	--audio_path="resources/vocals_accompaniment_10s.mp3" \
     	--output_path="sep_results/vocals_accompaniment_10s_sep_vocals.mp3"
 
+seperate_dir:
+	TRAIN_CONFIG=accompaniment-vocals,mobilenet_subbandtime; \
+	echo "seperating train for $${TRAIN_CONFIG}"; \
+	python3.8 scripts/09_separate.py separate_dir \
+	    --config_yaml="configs/training/$${TRAIN_CONFIG}.yaml" \
+    	--checkpoint_path="checkpoints/musdb18/agorski_sound_demixing/config=$${TRAIN_CONFIG},gpus=1/step=100000.pth" \
+    	--audios_dir="datasets/musdb18/train" \
+    	--outputs_dir="sep_results/$${TRAIN_CONFIG}/train"; \
+	python3.8 scripts/09_separate.py separate_dir \
+	    --config_yaml="configs/training/$${TRAIN_CONFIG}.yaml" \
+    	--checkpoint_path="checkpoints/musdb18/agorski_sound_demixing/config=$${TRAIN_CONFIG},gpus=1/step=100000.pth" \
+    	--audios_dir="datasets/musdb18/test" \
+    	--outputs_dir="sep_results/$${TRAIN_CONFIG}/test"; \
 
 seperate_dir_accompaniment_vocals_mobilenet_subbandtime:
 	TRAIN_CONFIG=accompaniment-vocals,mobilenet_subbandtime; \
