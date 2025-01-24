@@ -7,12 +7,11 @@ from datetime import datetime
 from pytorch_lightning.loggers import TensorBoardLogger
 
 from pipelines.utils import read_yaml
-from pipelines.diffusion_models.configs.dataset import DatasetConfig
-from pipelines.diffusion_models.configs.model import ModelConfig
+from pipelines.diffusion_models.data import MultiSourceDataset
+from pipelines.diffusion_models.data_validation import DatamoduleWithValidation
 from pipelines.diffusion_models.model import Model as SeparationModel
-from pipelines.diffusion_models.data.dataset import MultiSourceDataset
-from pipelines.diffusion_models.data.dataloader import DatamoduleWithValidation
-
+from pipelines.diffusion_models.config.training import TrainingConfig
+from pipelines.diffusion_models.config.dataset import DatasetConfig
 
 if __name__ == "__main__":
     
@@ -54,10 +53,8 @@ if __name__ == "__main__":
     yaml_training_config = read_yaml(args.training_config)
     
     dataset_config = DatasetConfig(**yaml_dataset_config)
-    training_config = ModelConfig(**yaml_training_config)
+    training_config = TrainingConfig(**yaml_training_config)
     
-    print(args.training_data_path)
-    print(args.validation_data_path)
     
     train_ds = MultiSourceDataset(**dataset_config.model_dump(),
                                   audio_files_dir=args.training_data_path)
@@ -80,19 +77,14 @@ if __name__ == "__main__":
     training_model_dict.pop('batch_size')
     training_model_dict.pop('num_workers')
     training_model_dict.pop('pin_memory')
-
-    print(training_model_dict['num_blocks'])
     
+        
     model = SeparationModel(**training_model_dict,
                             diffusion_sigma_distribution=LogNormalDistribution(
                                 mean=training_config.diffusion_sigma_distribution_mean,
                                 std=training_config.diffusion_sigma_distribution_std,
                             )
                             )
-    
-    
-    
-    
     callbacks = [
         ModelCheckpoint(
             monitor="valid_loss",
@@ -110,7 +102,7 @@ if __name__ == "__main__":
     
     trainer = Trainer(precision="bf16", min_epochs=0, max_epochs=-1, enable_model_summary=True,
                       accelerator='gpu', devices=1,
-                      log_every_n_steps=10, check_val_every_n_epoch=None, val_check_interval=4000,
+                      log_every_n_steps=10, val_check_interval=2000,
                       callbacks=callbacks, logger=logger)
     
     trainer.fit(model=model, datamodule=datamodule)

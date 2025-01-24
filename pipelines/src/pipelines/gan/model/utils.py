@@ -11,12 +11,13 @@ from pipelines.gan.config import TrainingGANConfig
 class PhaseShuffle(nn.Module):
     """
     Performs phase shuffling, i.e., shifting the feature axis of a 3D tensor
-    by a random integer in the range [-shift_factor, shift_factor], with 
+    by a random integer in the range [-shift_factor, shift_factor], with
     reflection padding where necessary.
 
     Args:
         shift_factor (int): The maximum amount of shift along the feature axis.
     """
+
     def __init__(self, shift_factor: int):
         super(PhaseShuffle, self).__init__()
         self.shift_factor = shift_factor
@@ -89,7 +90,10 @@ def weights_init(m: nn.Module) -> None:
             m.bias.data.fill_(0)
 
 
-def update_optimizer_lr(optimizer: torch.optim.Optimizer, lr: float, decay: float) -> None:
+def update_optimizer_lr(
+        optimizer: torch.optim.Optimizer,
+        lr: float,
+        decay: float) -> None:
     """
     Updates the learning rate of the optimizer.
 

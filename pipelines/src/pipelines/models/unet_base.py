@@ -393,7 +393,8 @@ class UNet(nn.Module, Base):
         _mask_real = torch.tanh(x[:, :, :, 1, :, :])
         _mask_imag = torch.tanh(x[:, :, :, 2, :, :])
         _, mask_cos, mask_sin = magphase(_mask_real, _mask_imag)
-        # mask_cos, mask_sin: (batch_size, target_sources_num, input_channles, time_steps, freq_bins)
+        # mask_cos, mask_sin: (batch_size, target_sources_num, input_channles,
+        # time_steps, freq_bins)
 
         # Y = |Y|cos∠Y + j|Y|sin∠Y
         #   = |Y|cos(∠X + ∠M) + j|Y|sin(∠X + ∠M)
@@ -414,7 +415,8 @@ class UNet(nn.Module, Base):
         # Calculate Y_{real} and Y_{imag} for ISTFT.
         out_real = out_mag * out_cos
         out_imag = out_mag * out_sin
-        # out_real, out_imag: (batch_size, target_sources_num, input_channles, time_steps, freq_bins)
+        # out_real, out_imag: (batch_size, target_sources_num, input_channles,
+        # time_steps, freq_bins)
 
         # Reformat shape to (n, 1, time_steps, freq_bins) for ISTFT.
         shape = (

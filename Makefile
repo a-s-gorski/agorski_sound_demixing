@@ -99,5 +99,5 @@ seperate_dir_vocals_accompaniment_mobilenet_subbandtime:
 diffusion_train_model:
 	python scripts/diffusion_models/02_train.py --dataset_config=configs/diffusion_model/dataset.yaml \
 		--training_config=configs/diffusion_model/training.yaml \
-		--training_data_path=data/musdb18_diffusion/test \
-		--validation_data_path=data/musdb18_diffusion/valid
+		--training_data_path=data/musdb18_hq/train \
+		--validation_data_path=data/musdb18_hq/validation

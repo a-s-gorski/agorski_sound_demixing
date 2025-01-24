@@ -227,7 +227,8 @@ class UNetSubbandTime(nn.Module, Base):
         _mask_real = torch.tanh(x[:, :, :, 1, :, :])
         _mask_imag = torch.tanh(x[:, :, :, 2, :, :])
         _, mask_cos, mask_sin = magphase(_mask_real, _mask_imag)
-        # mask_cos, mask_sin: (batch_size, target_sources_num, input_channles, time_steps, freq_bins)
+        # mask_cos, mask_sin: (batch_size, target_sources_num, input_channles,
+        # time_steps, freq_bins)
 
         # Y = |Y|cos∠Y + j|Y|sin∠Y
         #   = |Y|cos(∠X + ∠M) + j|Y|sin(∠X + ∠M)
@@ -248,7 +249,8 @@ class UNetSubbandTime(nn.Module, Base):
         # Calculate Y_{real} and Y_{imag} for ISTFT.
         out_real = out_mag * out_cos
         out_imag = out_mag * out_sin
-        # out_real, out_imag: (batch_size, target_sources_num, input_channles, time_steps, freq_bins)
+        # out_real, out_imag: (batch_size, target_sources_num, input_channles,
+        # time_steps, freq_bins)
 
         # Reformat shape to (n, 1, time_steps, freq_bins) for ISTFT.
         shape = (
@@ -302,7 +304,8 @@ class UNetSubbandTime(nn.Module, Base):
         # soundfile.write(file='_zz.wav', data=subband_x.data.cpu().numpy()[0, 2], samplerate=11025)
 
         mag, cos_in, sin_in = self.wav_to_spectrogram_phase(subband_x)
-        # mag, cos_in, sin_in: (batch_size, input_channels * subbands_num, time_steps, freq_bins)
+        # mag, cos_in, sin_in: (batch_size, input_channels * subbands_num,
+        # time_steps, freq_bins)
 
         # Batch normalize on individual frequency bins.
         x = mag.transpose(1, 3)

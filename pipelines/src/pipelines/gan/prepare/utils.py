@@ -17,6 +17,7 @@ def get_map_size(files: list[str], config: TrainingGANConfig) -> int:
     """
     return load_wav(files[0], config=config).nbytes * 10 * (len(files) + 2)
 
+
 def get_silent_set(input_audio: np.ndarray) -> list[tuple[int, int, int]]:
     """
     Identifies contiguous silent segments in an audio array.
@@ -50,7 +51,9 @@ def get_silent_set(input_audio: np.ndarray) -> list[tuple[int, int, int]]:
 
     return index_sets
 
-def remove_silence(input_audio: np.ndarray, index_sets: list[tuple[int, int, int]]) -> np.ndarray:
+
+def remove_silence(input_audio: np.ndarray,
+                   index_sets: list[tuple[int, int, int]]) -> np.ndarray:
     """
     Removes silent segments from an audio array based on the provided index sets.
 
@@ -66,7 +69,10 @@ def remove_silence(input_audio: np.ndarray, index_sets: list[tuple[int, int, int
         input_audio = np.delete(input_audio, range(first_indx, last_idx))
     return input_audio
 
-def get_sequence_with_singing_indices(full_sequence: np.ndarray, chunk_length: int = 800) -> np.ndarray:
+
+def get_sequence_with_singing_indices(
+        full_sequence: np.ndarray,
+        chunk_length: int = 800) -> np.ndarray:
     """
     Identifies indices of sequences containing singing based on signal energy.
 

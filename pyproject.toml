@@ -30,6 +30,9 @@ dependencies = [
     "mir_eval>=0.7.0,<1.0.0",
     "av>=12.3.0,<13.0.0",
     "audio_diffusion_pytorch==0.0.43",
+    "rich>=13.9.4,<14.0.0",
+    "autopep8>=2.3.1",
+    "isort>=5.13.2",
 ]
 
 [dependency-groups]

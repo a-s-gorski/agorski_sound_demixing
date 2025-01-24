@@ -10,7 +10,10 @@ from pipelines.gan.prepare.utils import get_map_size, get_sequence_with_singing_
 from pipelines.gan.utils import get_recursive_files, load_wav
 
 
-def write_lmdb(out_file_name: str, data_list: List[str], config: TrainingGANConfig) -> None:
+def write_lmdb(
+        out_file_name: str,
+        data_list: List[str],
+        config: TrainingGANConfig) -> None:
     """
     Writes audio data to an LMDB database.
 
@@ -42,7 +45,8 @@ def write_lmdb(out_file_name: str, data_list: List[str], config: TrainingGANConf
             ).astype('float32')
 
             # Get indices of vocal segments
-            vocals_indices = get_sequence_with_singing_indices(vocals_data, window_size=800)
+            vocals_indices = get_sequence_with_singing_indices(
+                vocals_data, window_size=800)
 
             # Create a protobuf data object
             datum = datanum_pb2.DataNum()

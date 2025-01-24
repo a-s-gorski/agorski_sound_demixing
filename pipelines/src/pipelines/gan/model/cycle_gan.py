@@ -46,6 +46,7 @@ class CycleGan(object):
         optimizer_d_2 (optim.Optimizer): Optimizer for the second discriminator.
         optimizer_g (optim.Optimizer): Optimizer for the generator.
     """
+
     def __init__(
             self,
             config: TrainingGANConfig,

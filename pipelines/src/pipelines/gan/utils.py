@@ -15,6 +15,7 @@ logger = logging.getLogger(__name__)
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
+
 def get_recursive_files(folder_path: str, ext: str) -> List[str]:
     """Recursively retrieves files with a given extension from a folder.
 
@@ -35,6 +36,7 @@ def get_recursive_files(folder_path: str, ext: str) -> List[str]:
 
     return out_files
 
+
 def make_path(output_path: str) -> str:
     """Creates a directory if it does not exist.
 
@@ -48,10 +50,11 @@ def make_path(output_path: str) -> str:
         os.makedirs(output_path)
     return output_path
 
+
 def sample_audio(
-    audio_data: np.ndarray, 
-    config: TrainingGANConfig, 
-    start_idx: Optional[int] = None, 
+    audio_data: np.ndarray,
+    config: TrainingGANConfig,
+    start_idx: Optional[int] = None,
     end_idx: Optional[int] = None
 ) -> Tuple[np.ndarray, int, int]:
     """Samples a window of audio data.
@@ -77,9 +80,10 @@ def sample_audio(
     assert not np.any(np.isnan(sample))
     return sample, start_idx, end_idx
 
+
 def create_stream_reader(
-    single_signal_file_list: List[str], 
-    other_signal_file_list: List[str], 
+    single_signal_file_list: List[str],
+    other_signal_file_list: List[str],
     config: TrainingGANConfig
 ) -> Generator:
     """Creates a data stream reader for training.
@@ -97,8 +101,8 @@ def create_stream_reader(
     for audio_path in single_signal_file_list:
         other_signal_idx = np.random.randint(0, other_signal_len)
         stream = pescador.Streamer(
-            wav_generator, 
-            audio_path, 
+            wav_generator,
+            audio_path,
             other_signal_file_list[other_signal_idx]
         )
         data_streams.append(stream)
@@ -106,7 +110,9 @@ def create_stream_reader(
     batch_gen = pescador.buffer_stream(mux, config.batch_size)
     return batch_gen
 
-def wav_generator(file_path: str, mixing_signal_path: str) -> Generator[dict, None, None]:
+
+def wav_generator(
+        file_path: str, mixing_signal_path: str) -> Generator[dict, None, None]:
     """Generates audio samples and their mixtures.
 
     Args:
@@ -127,8 +133,9 @@ def wav_generator(file_path: str, mixing_signal_path: str) -> Generator[dict, No
 
         yield {'single': sample, 'mixed': mixed_signal}
 
+
 def audio_generator(
-    audio_data: np.ndarray, 
+    audio_data: np.ndarray,
     config: TrainingGANConfig
 ) -> Generator[np.ndarray, None, None]:
     """Generates audio segments from an audio file.
@@ -150,9 +157,10 @@ def audio_generator(
         result[:audio_size] = audio_data[start_idx:end_idx]
         yield result
 
+
 def load_wav(
-    wav_file_path: str, 
-    config: TrainingGANConfig, 
+    wav_file_path: str,
+    config: TrainingGANConfig,
     fast_loading: bool = False
 ) -> np.ndarray:
     """Loads a WAV file into a numpy array.
@@ -196,10 +204,11 @@ def load_wav(
 
     return audio_data.astype('float32')
 
+
 def save_samples(
-    epoch_samples: List[np.ndarray], 
-    epoch: int, 
-    config: TrainingGANConfig, 
+    epoch_samples: List[np.ndarray],
+    epoch: int,
+    config: TrainingGANConfig,
     prefix: str = ''
 ) -> None:
     """Saves audio samples to disk.
@@ -214,12 +223,16 @@ def save_samples(
 
     for idx, sample in enumerate(epoch_samples):
         output_path = os.path.join(sample_dir, f"{prefix}_{idx + 1}.wav")
-        soundfile.write(file=output_path, data=sample[0], samplerate=config.sampling_rate)
+        soundfile.write(
+            file=output_path,
+            data=sample[0],
+            samplerate=config.sampling_rate)
+
 
 def sample_buffer(
-    buffer_data: np.ndarray, 
-    config: TrainingGANConfig, 
-    start_idx: Optional[int] = None, 
+    buffer_data: np.ndarray,
+    config: TrainingGANConfig,
+    start_idx: Optional[int] = None,
     end_idx: Optional[int] = None
 ) -> Tuple[np.ndarray, int, int]:
     """Samples a segment from a buffer of audio data.
@@ -243,6 +256,7 @@ def sample_buffer(
         sample = buffer_data[start_idx * 4:end_idx * 4]
     return sample, start_idx, end_idx
 
+
 def numpy_to_tensor(numpy_array: np.ndarray) -> torch.Tensor:
     """Converts a numpy array to a PyTorch tensor.
 
@@ -254,6 +268,7 @@ def numpy_to_tensor(numpy_array: np.ndarray) -> torch.Tensor:
     """
     numpy_array = numpy_array[:, np.newaxis, :]
     return torch.Tensor(numpy_array).to(device)
+
 
 def sample_noise(size: int, config: TrainingGANConfig) -> torch.Tensor:
     """Generates random noise for GAN training.
