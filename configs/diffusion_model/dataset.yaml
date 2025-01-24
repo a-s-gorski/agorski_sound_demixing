@@ -1,4 +1,5 @@
 sr: 44100
+sample_length: 262144
 channels: 1
 min_duration: 12.0
 max_duration: 640.0
