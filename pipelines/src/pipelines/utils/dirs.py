@@ -1,6 +1,6 @@
 import os
 import pathlib
-from typing import Dict, List
+from typing import List
 
 import pytorch_lightning as pl
 
