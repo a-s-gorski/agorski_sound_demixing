@@ -1,8 +1,7 @@
-from typing import Any, Optional, Tuple
+from typing import Tuple
 
 import pytorch_lightning as pl
 import torch
-from pytorch_lightning.utilities.types import STEP_OUTPUT
 from torch import nn
 
 from pipelines.types.training_signal_enriched import TrainingGenerativeConfig
@@ -202,7 +201,6 @@ class Generator(pl.LightningModule):
         pool_x2 = self.AvgPool1D2(x)
         pool_x3 = self.AvgPool1D3(x)
 
-        ############# Encoder#####################
 
         out_0 = self.layer1(x)
         out_1 = self.layer2(out_0)
@@ -213,7 +211,6 @@ class Generator(pl.LightningModule):
         x = torch.cat([out_2, pool_x2], 1)
         x = self.layer4(x)
 
-        ############# Decoder####################
 
         up = self.upsample1(x)
         up = torch.cat([up, out_2], 1)

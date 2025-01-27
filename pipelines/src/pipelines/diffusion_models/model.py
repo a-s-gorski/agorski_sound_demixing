@@ -14,6 +14,7 @@ class Model(pl.LightningModule):
         *args: Additional arguments for the AudioDiffusionModel.
         **kwargs: Additional keyword arguments for the AudioDiffusionModel.
     """
+
     def __init__(
         self, learning_rate: float, beta1: float, beta2: float, *args, **kwargs
     ):

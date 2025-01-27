@@ -7,8 +7,6 @@ from torchlibrosa.stft import ISTFT, STFT, magphase
 
 from pipelines.utils.pytorch_modules import Base, init_bn, init_layer
 
-# from bytesep.models.pytorch_modules import Base, init_bn, init_layer
-
 
 class ConvBlockRes(nn.Module):
     def __init__(self, in_channels, out_channels, kernel_size, activation, momentum):

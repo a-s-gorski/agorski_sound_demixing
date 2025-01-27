@@ -27,12 +27,10 @@ def get_duration_sec(file, cache=False):
             with open(file + ".dur", "w") as f:
                 f.write(str(duration) + "\n")
         return duration
-        
-    
+
     with open(file + ".dur", "r") as f:
         duration = float(f.readline().strip("\n"))
     return duration
-
 
 
 def load_audio(

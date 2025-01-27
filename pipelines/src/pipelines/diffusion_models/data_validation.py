@@ -5,7 +5,7 @@ from torch.utils.data import DataLoader
 class DatamoduleWithValidation(pl.LightningDataModule):
     """
     A PyTorch Lightning DataModule that handles training and validation datasets.
-    
+
     Attributes:
         data_train: The dataset used for training.
         data_val: The dataset used for validation.
@@ -13,7 +13,7 @@ class DatamoduleWithValidation(pl.LightningDataModule):
         num_workers: Number of subprocesses used for data loading.
         pin_memory: If True, the data loader will copy tensors into CUDA pinned memory.
     """
-    
+
     def __init__(
         self,
         train_dataset,
@@ -25,7 +25,7 @@ class DatamoduleWithValidation(pl.LightningDataModule):
     ) -> None:
         """
         Initializes the data module with training and validation datasets.
-        
+
         Args:
             train_dataset: A dataset instance used for training.
             val_dataset: A dataset instance used for validation.
@@ -44,7 +44,7 @@ class DatamoduleWithValidation(pl.LightningDataModule):
     def train_dataloader(self) -> DataLoader:
         """
         Returns the DataLoader for the training dataset.
-        
+
         Returns:
             DataLoader: A PyTorch DataLoader for the training dataset.
         """
@@ -59,7 +59,7 @@ class DatamoduleWithValidation(pl.LightningDataModule):
     def val_dataloader(self) -> DataLoader:
         """
         Returns the DataLoader for the validation dataset.
-        
+
         Returns:
             DataLoader: A PyTorch DataLoader for the validation dataset.
         """

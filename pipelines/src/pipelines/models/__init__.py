@@ -165,9 +165,6 @@ def get_model_class(model_type):
         nn.Module
     """
     if model_type == 'ResUNet143_DecouplePlusInplaceABN_ISMIR2021':
-        # from bytesep.models.resunet_ismir2021 import (
-        #     ResUNet143_DecouplePlusInplaceABN_ISMIR2021,
-        # )
 
         return ResUNet143_DecouplePlusInplaceABN_ISMIR2021
 
@@ -180,100 +177,12 @@ def get_model_class(model_type):
         return UNetSubbandTime
 
     elif model_type == 'ResUNet143_Subbandtime':
-        # from bytesep.models.resunet_subbandtime import ResUNet143_Subbandtime
 
         return ResUNet143_Subbandtime
 
     elif model_type == 'MobileNet_Subbandtime':
 
         return MobileNet_Subbandtime
-
-    # elif model_type == 'MobileTiny_Subbandtime':
-    #     from bytesep.models.mobiletiny_subbandtime import MobileTiny_Subbandtime
-
-    #     return MobileTiny_Subbandtime
-
-    # TODO - add later
-    # elif model_type == 'ResUNet143_DecouplePlus':
-    #     # from bytesep.models.resunet import ResUNet143_DecouplePlus
-
-    #     return ResUNet143_Dec
-
-    # TODO - add later
-    # elif model_type == 'ConditionalUNet':
-    #     # from bytesep.models.conditional_unet import ConditionalUNet
-
-    #     return ConditionalUNet
-
-    # elif model_type == 'LevelRNN':
-    #     from bytesep.models.levelrnn import LevelRNN
-
-    #     return LevelRNN
-
-    # elif model_type == 'WavUNet':
-    #     from bytesep.models.wavunet import WavUNet
-
-    #     return WavUNet
-
-    # elif model_type == 'WavUNetLevelRNN':
-    #     from bytesep.models.wavunet_levelrnn import WavUNetLevelRNN
-
-    #     return WavUNetLevelRNN
-
-    # elif model_type == 'TTnet':
-    #     from bytesep.models.ttnet import TTnet
-
-    #     return TTnet
-
-    # elif model_type == 'TTnetNoTransformer':
-    #     from bytesep.models.ttnet_no_transformer import TTnetNoTransformer
-
-    #     return TTnetNoTransformer
-
-    # elif model_type == 'JiafengCNN':
-    #     from bytesep.models.ttnet_jiafeng import JiafengCNN
-
-    #     return JiafengCNN
-
-    # elif model_type == 'JiafengTTNet':
-    #     from bytesep.models.ttnet_jiafeng import JiafengTTNet
-
-    #     return JiafengTTNet
-
-    # elif model_type == 'ResUNet143FC_Subbandtime':
-    #     from bytesep.models.resunet_subbandtime2 import ResUNet143FC_Subbandtime
-
-    #     return ResUNet143FC_Subbandtime
-
-    # elif model_type == 'AmbisonicToBinaural_UNetSubbandtimePhase':
-    #     from bytesep.models.ambisonic_to_binaural import (
-    #         AmbisonicToBinaural_UNetSubbandtimePhase,
-    #     )
-
-    #     return AmbisonicToBinaural_UNetSubbandtimePhase
-
-    # elif model_type == 'AmbisonicToBinaural_ResUNetSubbandtimePhase':
-    #     from bytesep.models.ambisonic_to_binaural import (
-    #         AmbisonicToBinaural_ResUNetSubbandtimePhase,
-    #     )
-
-    #     return AmbisonicToBinaural_ResUNetSubbandtimePhase
-
-    # TODO - add later
-    # elif model_type == 'MobileNetSubbandTime':
-    #     # from bytesep.models.mobilenet_subbandtime import MobileNetSubbandTime
-
-    #     return MobileNetSubbandTime
-
-    # elif model_type == 'WrapperDemucs':
-    #     from bytesep.models.demucs.demucs import WrapperDemucs
-
-    #     return WrapperDemucs
-
-    # elif model_type == 'WrapperHDemucs':
-    #     from bytesep.models.demucs.hdemucs import WrapperHDemucs
-
-    #     return WrapperHDemucs
 
     else:
         raise NotImplementedError("{} not implemented!".format(model_type))
