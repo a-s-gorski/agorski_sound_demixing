@@ -33,7 +33,7 @@ train_accompaniment_vocals_resunet_subbandtime: # done
 train_accompaniment_vocals_resunet: # done
 	python3.8 scripts/08_train.py --gpus=1 --config_yaml="configs/training/accompaniment-vocals,resunet.yaml"
 
-train_accompaniment_vocals_unet: # works to be tested on coltrane
+train_accompaniment_vocals_unet: # done
 	python3.8 scripts/08_train.py --gpus=1 --config_yaml="configs/training/accompaniment-vocals,unet.yaml"
 
 train_vocals_accompaniment_mobilenet_subbandtime: # done
@@ -45,13 +45,13 @@ train_vocals_accompaniment_resunet_ismir2021: # done
 train_vocals_accompaniment_resunet_subbandtime: # done
 	python3.8 scripts/08_train.py --gpus=1 --config_yaml="configs/training/vocals-accompaniment,resunet_subbandtime.yaml"
 
-train_vocals_accompaniment_resunet: # in-progress
+train_vocals_accompaniment_resunet: # done
 	python3.8 scripts/08_train.py --gpus=1 --config_yaml="configs/training/vocals-accompaniment,resunet.yaml"
 
-train_vocals_accompaniment_unet: # works to be tested on coltrane
+train_vocals_accompaniment_unet: # done
 	python3.8 scripts/08_train.py --gpus=1 --config_yaml="configs/training/vocals-accompaniment,unet.yaml"
 
-train_vocals_bass_drums_other_resunet_subbandtime: # works to be tested on coltrane
+train_vocals_bass_drums_other_resunet_subbandtime: # in-progress
 	python3.8 scripts/08_train.py --gpus=1 --config_yaml="configs/training/vocals-bass-drums-other,resunet_subbandtime.yaml"
 
 train_vocals_bass_drums_other_unet: # works to be tested on coltrane
