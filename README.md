@@ -179,30 +179,57 @@ To modify training parameters, you can edit the following configuration files:
 - **Dataset configuration:** `configs/diffusion_model/dataset.yaml`
 - **Model configuration:** `configs/diffusion_model/training.yaml`
 
----
-
-
-<!-- ## References
-- [pytorch-CycleGAN-and-pix2pix](https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix)
-- [multi-source-diffusion-models](https://github.com/gladia-research-group/multi-source-diffusion-models)
-- [audio_diffusion_pytorch](https://github.com/audio-diffusion/audio-diffusion-pytorch)
- -->
 
 ## About the package (for developers).
 
+### Uv
+
+The primary dependency and build management tool for this package is `uv`. It can be installed as mentioned in previous examples, although it is only recommended, not required. You can still install dependencies using:
+
+```sh
+pip install -e .
+```
+without uv, but the installation process will take significantly longer. After experimenting with multiple package managers, I found uv to be significantly faster than Hatch or Poetry.
+It also supports .lock files and custom sources, making it a more mature choice.
 
 
+### Technical issues
+
+There is an issue with the PyPI version of inplace_abn, which accelerates backpropagation for segmentation models. To use it correctly, you need to run a specific script.
+```sh
+source scripts/03_install_inplace_abn.sh
+```
+
+Package Structure
+- pipelines/src/pipelines/ – Core implementation of segmentation models.
+- pipelines/src/pipelines/diffusion_models/ – Logic for audio separation using diffusion models.
+- pipelines/src/pipelines/gan/ – Implementation of CycleGAN for audio source separation.
+- scripts/ – Example scripts demonstrating package functionality.
+- Makefile – Commands to simplify usage for data scientists.
+### Code formatting
+- Linter: flake8
+- Code Formatter: autopep8
+
+### Type hints and doctsrings
+The implementation adheres to the Zen of Python, with a strong emphasis on PEP standards:
+
+- PEP 8 – Style guide for Python code.
+- PEP 257 – Docstring conventions.
+- PEP 484 – Type hinting.
+The code follows best practices in object-oriented programming and design patterns, with modularity and future extensibility in mind.
+
+### Further ideas...
+- Extend segmentation models to include Wave-U-Net for improved performance.
+- Support a wider range of datasets (currently only .wav file with separate stems).
+- Reintroduce model tracking via MLflow or a cheap VPS setup for DVC.
+- Explore self-hosted alternatives like MinIO for artifact storage.
+- Since moving from DAGsHub to GitHub (due to licensing changes), .dvc files are no longer tracked. Most tracking has been migrated to TensorBoard, which is sufficient for current research. However, if I can set up an MLflow server and an artifact repository (e.g., S3 or MinIO with persistent storage), I may reconsider full tracking and model registry integration.
 
 
-
-
-
-
-
-
-
-
-
+### References
+- [pytorch-CycleGAN-and-pix2pix](https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix)
+- [multi-source-diffusion-models](https://github.com/gladia-research-group/multi-source-diffusion-models)
+- [audio_diffusion_pytorch](https://github.com/audio-diffusion/audio-diffusion-pytorch)
 
 
 
