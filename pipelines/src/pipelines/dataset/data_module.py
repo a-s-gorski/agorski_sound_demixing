@@ -302,10 +302,8 @@ def get_data_module(
         steps_per_epoch=steps_per_epoch,
     )
 
-    # augmentor
     augmentor = Augmentor(augmentations=augmentations)
 
-    # dataset
     train_dataset = Dataset(
         input_source_types=input_source_types,
         target_source_types=target_source_types,
@@ -315,7 +313,6 @@ def get_data_module(
         segment_samples=segment_samples,
     )
 
-    # data module
     data_module = DataModule(
         train_sampler=train_sampler,
         train_dataset=train_dataset,

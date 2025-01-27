@@ -6,7 +6,7 @@ from pipelines.gan.model.utils import PhaseShuffle
 
 class Conv1D(nn.Module):
     """
-    A 1D convolutional layer with optional Batch Normalization, Leaky ReLU activation, 
+    A 1D convolutional layer with optional Batch Normalization, Leaky ReLU activation,
     Phase Shuffling, and Dropout.
 
     Args:
@@ -20,6 +20,7 @@ class Conv1D(nn.Module):
         use_batch_norm (bool, optional): Whether to use Batch Normalization. Default: False.
         drop_prob (float, optional): Dropout probability. Default: 0.
     """
+
     def __init__(
             self,
             input_channels: int,
@@ -77,7 +78,13 @@ class ResidualBlock(nn.Module):
         alpha (float, optional): Negative slope for the Leaky ReLU activation. Default: 0.2.
         shift_factor (int, optional): Shift factor for Phase Shuffle. Default: 2.
     """
-    def __init__(self, in_features: int, use_batch_norm: bool = True, alpha: float = 0.2, shift_factor: int = 2):
+
+    def __init__(
+            self,
+            in_features: int,
+            use_batch_norm: bool = True,
+            alpha: float = 0.2,
+            shift_factor: int = 2):
         super(ResidualBlock, self).__init__()
         conv_blocks = [
             Conv1D(
@@ -126,11 +133,12 @@ class Transpose1dLayer(nn.Module):
         kernel_size (int): Size of the convolutional kernel.
         stride (int): Stride for the transpose convolution.
         padding (int, optional): Padding for the transpose convolution. Default: 11.
-        upsample (float, optional): Upsampling factor. If provided, nearest-neighbor upsampling 
+        upsample (float, optional): Upsampling factor. If provided, nearest-neighbor upsampling
                                     is applied before convolution. Default: None.
         output_padding (int, optional): Additional padding for the transpose convolution. Default: 1.
         use_batch_norm (bool, optional): Whether to use Batch Normalization. Default: False.
     """
+
     def __init__(
             self,
             in_channels: int,

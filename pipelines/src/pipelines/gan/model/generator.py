@@ -7,6 +7,7 @@ from pipelines.gan.model.layers import Conv1D, ResidualBlock, Transpose1dLayer
 
 logger = logging.getLogger(__name__)
 
+
 class CyclicWaveGanGenerator(nn.Module):
     """
     A generator model for Cyclic WaveGAN, designed for waveform generation.
@@ -21,6 +22,7 @@ class CyclicWaveGanGenerator(nn.Module):
         transformation (nn.Sequential): Transformation network composed of ResidualBlock layers.
         upsampling (nn.Sequential): Upsampling network with stacked Transpose1dLayer layers.
     """
+
     def __init__(
             self,
             model_size: int = 64,

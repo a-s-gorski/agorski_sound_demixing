@@ -31,7 +31,6 @@ def train(workspace, gpus, config_yaml, filename) -> NoReturn:
     distributed = True if gpus > 1 else False
     evaluate_device = "cuda" if gpus > 0 else "cpu"
 
-    # Read config file.
     configs = read_yaml(config_yaml)
     check_configs_gramma(configs)
     task_name = configs['task_name']
@@ -52,12 +51,10 @@ def train(workspace, gpus, config_yaml, filename) -> NoReturn:
 
     target_sources_num = len(target_source_types)
 
-    # paths
     checkpoints_dir, logs_dir, logger, statistics_path = get_dirs(
         workspace, task_name, filename, config_yaml, gpus
     )
 
-    # training data module
     data_module = get_data_module(
         workspace=workspace,
         config_yaml=config_yaml,

@@ -2,7 +2,18 @@ import pytorch_lightning as pl
 import torch
 from audio_diffusion_pytorch import AudioDiffusionModel
 
+
 class Model(pl.LightningModule):
+    """
+    PyTorch Lightning module for training an Audio Diffusion Model.
+
+    Args:
+        learning_rate (float): Learning rate for the optimizer.
+        beta1 (float): Beta1 parameter for Adam optimizer.
+        beta2 (float): Beta2 parameter for Adam optimizer.
+        *args: Additional arguments for the AudioDiffusionModel.
+        **kwargs: Additional keyword arguments for the AudioDiffusionModel.
+    """
     def __init__(
         self, learning_rate: float, beta1: float, beta2: float, *args, **kwargs
     ):

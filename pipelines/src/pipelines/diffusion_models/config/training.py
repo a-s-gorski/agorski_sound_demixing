@@ -1,12 +1,13 @@
+from typing import List
+
 from pydantic import BaseModel
-from typing import List 
 
 
-class ModelConfig(BaseModel):
+class TrainingConfig(BaseModel):
     learning_rate: float = 1e-4
     beta1: float = 0.9
-    beta2: float = 0.9
-    in_channels: int = 5
+    beta2: float = 0.99
+    in_channels: int = 4
     channels: int = 256
     patch_factor: int = 16
     patch_blocks: int = 1
@@ -25,9 +26,8 @@ class ModelConfig(BaseModel):
     use_attention_bottleneck: bool = True
     diffusion_sigma_distribution_mean: float = -3.0
     diffusion_sigma_distribution_std: float = 1.0
-    # diffusion_sigma_distribution = LogNormalDistribution(mean=-3.0, std=1.0)
     diffusion_sigma_data: float = 0.2
     diffusion_dynamic_threshold: float = 0.0
-    batch_size: int = 8
+    batch_size: int = 2
     num_workers: int = 4
     pin_memory: bool = True

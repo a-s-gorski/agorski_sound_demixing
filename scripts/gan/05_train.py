@@ -6,8 +6,6 @@ from pipelines.gan.config import load_gan_config
 from pipelines.gan.data.loader import LMDBWavLoader
 
 config = load_gan_config('configs/gan/config.yaml')
-print("CONFIG", config)
-print("CUDA", torch.cuda.is_available())
 writer = SummaryWriter(log_dir="./logs")
 
 train_dataset = LMDBWavLoader(config, 'musdb_train')

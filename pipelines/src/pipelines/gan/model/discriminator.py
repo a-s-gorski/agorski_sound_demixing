@@ -29,6 +29,7 @@ class WaveGANDiscriminator(nn.Module):
         forward(x: torch.Tensor) -> torch.Tensor:
             Performs a forward pass through the discriminator.
     """
+
     def __init__(self, model_size=64, ngpus=1, num_channels=1, shift_factor=2,
                  alpha=0.2, verbose=False, slice_len=16384, use_batch_norm=False):
         super(WaveGANDiscriminator, self).__init__()

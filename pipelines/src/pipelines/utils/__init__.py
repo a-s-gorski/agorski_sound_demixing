@@ -87,9 +87,7 @@ def check_configs_gramma(configs: Dict) -> NoReturn:
                     error_msg = (
                         "The source type '{}'' in configs['train']['augmentations']['{}'] "
                         "must be one of input_source_types {}".format(
-                            source_type, augmentation_type, input_source_types
-                        )
-                    )
+                            source_type, augmentation_type, input_source_types))
                     raise Exception(error_msg)
 
 
