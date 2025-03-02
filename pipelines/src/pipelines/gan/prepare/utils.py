@@ -3,8 +3,10 @@ import numpy as np
 from pipelines.gan.config import TrainingGANConfig
 from pipelines.gan.utils import load_wav
 
+from typing import List, Tuple
 
-def get_map_size(files: list[str], config: TrainingGANConfig) -> int:
+
+def get_map_size(files: List[str], config: TrainingGANConfig) -> int:
     """
     Calculates the size of a map based on the provided audio files and configuration.
 
@@ -18,7 +20,7 @@ def get_map_size(files: list[str], config: TrainingGANConfig) -> int:
     return load_wav(files[0], config=config).nbytes * 10 * (len(files) + 2)
 
 
-def get_silent_set(input_audio: np.ndarray) -> list[tuple[int, int, int]]:
+def get_silent_set(input_audio: np.ndarray) -> List[Tuple[int, int, int]]:
     """
     Identifies contiguous silent segments in an audio array.
 
@@ -53,7 +55,7 @@ def get_silent_set(input_audio: np.ndarray) -> list[tuple[int, int, int]]:
 
 
 def remove_silence(input_audio: np.ndarray,
-                   index_sets: list[tuple[int, int, int]]) -> np.ndarray:
+                   index_sets: List[Tuple[int, int, int]]) -> np.ndarray:
     """
     Removes silent segments from an audio array based on the provided index sets.
 

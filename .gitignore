@@ -18,3 +18,7 @@ musdb_test
 /diffusion_models/
 musdb18_input
 /data/
+output/
+musdb18-msdm-dirac/
+agorski_sound_demixing.egg-info/
+diffusion_logs/

@@ -6,7 +6,6 @@ import pandas as pd
 import torch
 from torch import nn
 from torch.utils.data import DataLoader
-from tqdm import tqdm
 
 from pipelines.dataset.base_dataset import BaseDataset
 from pipelines.types.training_waveform import TrainingWaveformConfig, WaveformModel

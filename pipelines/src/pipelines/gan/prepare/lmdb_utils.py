@@ -46,7 +46,7 @@ def write_lmdb(
 
             # Get indices of vocal segments
             vocals_indices = get_sequence_with_singing_indices(
-                vocals_data, window_size=800)
+                vocals_data, chunk_length=800)
 
             # Create a protobuf data object
             datum = datanum_pb2.DataNum()

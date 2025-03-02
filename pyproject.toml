@@ -3,7 +3,7 @@ name = "agorski_sound_demixing"
 version = "0.1.0"
 description = "Your package description"
 authors = [
-    { name = "Your Name", email = "your.email@example.com" }
+    { name = "Adam Gorski", email = "adamsebastiangorski@gmail.com" }
 ]
 dependencies = [
     "pydantic>=2.9.2,<3.0.0",
@@ -20,7 +20,7 @@ dependencies = [
     "torchlibrosa==0.0.9",
     "torchaudio==2.4.1",
     "torchvision==0.19.1",
-    "numpy~=1.23.0",
+    "numpy~=1.22.0",
     "pescador>=3.0.0,<4.0.0",
     "lmdb>=1.5.1,<2.0.0",
     "scipy>=1.8.0,<2.0.0",

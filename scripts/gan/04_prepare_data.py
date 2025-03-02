@@ -6,13 +6,13 @@ from pipelines.gan import datanum_pb2
 from pipelines.gan.prepare.lmdb_utils import create_lmdb
 from pipelines.gan.config import load_gan_config
 
-parent_folder = 'data/train'
+parent_folder = 'data/musdb18_hq/train'
 
 config = load_gan_config('configs/gan/config.yaml')
 
 create_lmdb(parent_folder, 'musdb_train', config=config)
 
-parent_folder = 'data/test'
+parent_folder = 'data/musdb18_hq/test'
 
 create_lmdb(parent_folder, 'musdb_test', False, config=config)
 

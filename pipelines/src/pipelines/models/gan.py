@@ -201,7 +201,6 @@ class Generator(pl.LightningModule):
         pool_x2 = self.AvgPool1D2(x)
         pool_x3 = self.AvgPool1D3(x)
 
-
         out_0 = self.layer1(x)
         out_1 = self.layer2(out_0)
 

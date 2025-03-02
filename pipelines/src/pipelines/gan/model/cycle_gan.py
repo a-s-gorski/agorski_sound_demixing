@@ -152,11 +152,12 @@ class CycleGan(object):
         val_data = next(val_set)
         fixed_mixed_signal = val_data[1].to(self.device)
         fixed_single_signal = val_data[0].to(self.device)
-        save_samples(fixed_mixed_signal.detach().cpu().numpy(), 'fixed_mixed')
-        save_samples(fixed_single_signal.detach().cpu().numpy(), 'fixed_single')
+        save_samples(fixed_mixed_signal.detach().cpu().numpy(), 'fixed_mixed', config=self.config)
+        save_samples(fixed_single_signal.detach().cpu().numpy(), 'fixed_single', config=self.config)
 
         gan_model_name = 'gan_cyclic_single_2disc_{}.tar'.format(
             self.config.model_prefix)
+        
 
         first_iter = 0
         if self.config.take_backup and os.path.isfile(gan_model_name):
@@ -211,11 +212,13 @@ class CycleGan(object):
             self.generator.train()
             self.discriminator_1.train()
             self.discriminator_2.train()
+            
             try:
                 data = next(train_set)
             except StopIteration:
                 train_set = iter(self.train_loader)
                 data = next(train_set)
+            
 
             # in case of unpaired data
             single_signal = data[0].to(self.device)
@@ -355,7 +358,7 @@ class CycleGan(object):
             if (iter_indx % self.config.save_samples_every == 0):
                 with torch.no_grad():
                     fake = self.generator(fixed_mixed_signal).detach().cpu().numpy()
-                save_samples(fake, iter_indx, prefix='predictions')
+                save_samples(fake, iter_indx, prefix='predictions', config=self.config)
 
             if self.config.take_backup and iter_indx % self.config.backup_every_n_iters == 0:
                 saving_dict = {
