@@ -21,7 +21,7 @@ val_loader = torch.utils.data.DataLoader(val_dataset, batch_size=config.batch_si
 
 gan_model = CycleGan(train_loader=train_loader,val_loader=val_loader, config=config, validate=True, writer=writer)
 
-# gan_model.train()
+gan_model.train()
 
 test_dataset = LMDBWavLoader(config=config, lmdb_file_path='musdb_test',is_test=True)
 
